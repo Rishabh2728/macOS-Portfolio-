@@ -1,0 +1,101 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", sans-serif;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(148, 163, 184, 0.7) rgba(255, 255, 255, 0.08);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 999px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(148, 163, 184, 0.85), rgba(100, 116, 139, 0.9));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, rgba(125, 211, 252, 0.95), rgba(59, 130, 246, 0.95));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.dark * {
+  scrollbar-color: rgba(125, 211, 252, 0.7) rgba(15, 23, 42, 0.24);
+}
+
+.dark *::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.24);
+}
+
+.dark *::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(125, 211, 252, 0.78), rgba(37, 99, 235, 0.88));
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+.big-sur-wallpaper {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0)),
+    linear-gradient(180deg, #4cb0eb 0%, #2e9ddd 14%, #2989d2 25%, #4f9ce4 42%, #8aaef0 62%, #b15bb3 100%);
+}
+
+.mac-input {
+  @apply w-full rounded-2xl border border-white/40 bg-white/60 px-4 py-3 text-sm text-slate-700 outline-none placeholder:text-slate-400 focus:border-sky-400;
+}
+
+.typing-inline-caret::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 0.95em;
+  margin-left: 0.14em;
+  border-radius: 999px;
+  vertical-align: -0.1em;
+  background: rgba(255, 255, 255, 0.95);
+  animation: caret-blink 1s step-end infinite;
+}
+
+.dark .typing-inline-caret::after {
+  background: rgb(241 245 249);
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .big-sur-wallpaper {
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0)),
+      linear-gradient(180deg, #55b4ec 0%, #3499dd 20%, #448fdc 40%, #939ce4 68%, #914898 100%);
+  }
+}
