@@ -788,11 +788,33 @@ function getWindowBody(id, controls) {
               <h3 className="text-base font-semibold uppercase tracking-[0.14em] text-slate-900">Skills</h3>
               <div className="mt-3 space-y-2">
                 <p><span className="font-semibold text-slate-900">Languages:</span> Java, Python, C, C++, SQL, JavaScript</p>
-                <p><span className="font-semibold text-slate-900">Frameworks/Tech:</span> React, Node.js, Express.js, MongoDB, MySQL</p>
+                <p><span className="font-semibold text-slate-900">Frameworks/Tech:</span> React, Node.js, Express.js, MongoDB, MySQL, PostgreSQL, Redis, Redux</p>
                 <p><span className="font-semibold text-slate-900">Tools:</span> Git, GitHub, Docker, Tableau, Power BI</p>
                 <p><span className="font-semibold text-slate-900">Core Concepts:</span> DSA, OOP, DBMS, OS, Networking, Cloud Computing</p>
                 <p><span className="font-semibold text-slate-900">Machine Learning:</span> Scikit-learn, Pandas, Feature Engineering, Model Evaluation</p>
-                <p><span className="font-semibold text-slate-900">Soft Skills:</span> Cross-functional teamwork, Problem-Solving, Project Management, Adaptability</p>
+                <p><span className="font-semibold text-slate-900">Soft Skills:</span> Cross-functional Collaboration, Problem Solving, Project Management, Adaptability</p>
+              </div>
+            </section>
+
+            <section>
+              <h3 className="text-base font-semibold uppercase tracking-[0.14em] text-slate-900">Freelance</h3>
+              <div className="mt-3 space-y-4">
+                <div>
+                  <p className="font-semibold text-slate-900">CampusOps – School Management System | Jan&apos; 2026</p>
+                  <p className="font-medium text-slate-900">Full-Stack Developer</p>
+                  <p>Built a MERN-based ERP managing attendance, timetables, exams, fees and the complete student lifecycles.</p>
+                  <p>Implemented secure role-based access for Super-Admin, Admin, Teachers, Students and Principal.</p>
+                  <p>Optimized APIs and database queries to maintain high performance under heavy concurrent traffic.</p>
+                  <p><span className="font-semibold text-slate-900">Tech Stack:</span> MERN, JWT, Bcrypt, RBAC, REST APIs, Docker</p>
+                </div>
+                <div>
+                  <p className="font-semibold text-slate-900">RD Institute Management &amp; Test Platform | Aug&apos; 2025</p>
+                  <p className="font-medium text-slate-900">Full-Stack Developer</p>
+                  <p>Developed a MERN platform managing 10k+ students with enrollment, batches, fees and faculty workflows.</p>
+                  <p>Architected a scalable online test engine handling 50k+ mock test attempts with auto-evaluation and analytics.</p>
+                  <p>Deployed secure authentication, session management and performance dashboards for institute insights.</p>
+                  <p><span className="font-semibold text-slate-900">Tech Stack:</span> MERN, JWT, Bcrypt, REST APIs, Docker</p>
+                </div>
               </div>
             </section>
 
@@ -800,34 +822,19 @@ function getWindowBody(id, controls) {
               <h3 className="text-base font-semibold uppercase tracking-[0.14em] text-slate-900">Projects</h3>
               <div className="mt-3 space-y-4">
                 <div>
-                  <p className="font-semibold text-slate-900">Data-Gen CLI - Synthetic Dataset Generator | GitHub | Oct&apos; 25</p>
-                  <p>Built an official PyPI.org library solving dataset scarcity challenges faced by approximately ~72% of data scientists during experimentation and prototyping.</p>
-                  <p>Added multi-format export (CSV, Excel, JSON), 50+ template options, and real-time customization, boosting data preparation efficiency by 60%.</p>
+                  <p className="font-semibold text-slate-900">Data-Gen CLI - Synthetic Dataset Generator | GitHub | Feb&apos; 2026</p>
+                  <p>Built an open-source Python CLI that generates realistic, schema-driven datasets for testing, analytics and ML workflows.</p>
+                  <p>Currently in use by 12,000+ users for experimentation and project development.</p>
+                  <p>Supports advanced relationship-aware data generation, a capability offered by only a few tools globally, including enterprise solutions like IBM&apos;s synthetic data tools.</p>
                   <p><span className="font-semibold text-slate-900">Tech Stack:</span> Python, Typer, Rich, Faker</p>
                 </div>
                 <div>
-                  <p className="font-semibold text-slate-900">Academic Burnout Prediction | GitHub | Jun&apos; 25</p>
-                  <p>Collected real-world behavioral, academic, and psychological indicators from students through a self-designed Google Form, enabling genuine modeling of burnout factors.</p>
-                  <p>Engineered meaningful features and evaluated multiple ML models, achieving 82% accuracy and producing actionable insights to support early burnout detection and wellness interventions.</p>
-                  <p><span className="font-semibold text-slate-900">Tech Stack:</span> Python, Pandas, Scikit-learn, ML</p>
+                  <p className="font-semibold text-slate-900">Creator Connect – Creator Networking Platform | GitHub | Dec&apos; 2025</p>
+                  <p>Built a MERN platform enabling creators to connect, share posts and collaborate in a community space.</p>
+                  <p>Implemented real-time messaging and media uploads supporting images and videos.</p>
+                  <p>Designed scalable APIs, authentication and user interaction features for long-term growth.</p>
+                  <p><span className="font-semibold text-slate-900">Tech Stack:</span> MERN, WebSockets, JWT, Cloudinary</p>
                 </div>
-                <div>
-                  <p className="font-semibold text-slate-900">Fake Account Detector System | GitHub | Apr&apos; 25</p>
-                  <p>Built a full-stack AI system that detects fake/bot Twitter accounts using API-driven data collection, keystroke dynamics, watermark patterns, and behavioral analytics, boosting accuracy by 35%.</p>
-                  <p>Optimized a Random Forest classifier and automated the feature pipeline, reducing false positives by 20% and improving overall system reliability by 50%.</p>
-                  <p><span className="font-semibold text-slate-900">Tech Stack:</span> Python, JavaScript, React, Twitter API, Machine Learning</p>
-                </div>
-              </div>
-            </section>
-
-            <section>
-              <h3 className="text-base font-semibold uppercase tracking-[0.14em] text-slate-900">Training</h3>
-              <div className="mt-3">
-                <p className="font-semibold text-slate-900">CSE Pathshala | Link | Jun&apos; 25 - Jul&apos; 25</p>
-                <p className="font-medium text-slate-900">Full Stack Web-Development</p>
-                <p>Developed responsive and user-friendly web interfaces using HTML, CSS, JavaScript, and Bootstrap, improving UI consistency and page engagement.</p>
-                <p>Built and integrated RESTful APIs with Node.js &amp; Express and managed databases using MySQL/MongoDB, enhancing data handling efficiency by 25%.</p>
-                <p>Implemented secure user authentication (JWT, bcrypt) and deployed full-stack applications on cloud platforms, ensuring smooth performance and reliability.</p>
               </div>
             </section>
 
@@ -843,8 +850,8 @@ function getWindowBody(id, controls) {
             <section>
               <h3 className="text-base font-semibold uppercase tracking-[0.14em] text-slate-900">Achievements</h3>
               <div className="mt-3 space-y-1">
-                <p>5 Stars on HackerRank in SQL, Problem Solving and C++ | Link | Nov&apos; 25</p>
-                <p>Built and shipped DataGen-CLI, achieving 12,000+ downloads worldwide | Link | Jan&apos; 26</p>
+                <p>DataGen-CLI reached 12,000+ global downloads | Link | Jan&apos; 2026</p>
+                <p>5 Stars on HackerRank in SQL, Problem Solving and C++ | Link | Nov&apos; 2025</p>
               </div>
             </section>
 
@@ -853,15 +860,15 @@ function getWindowBody(id, controls) {
               <div className="mt-3 space-y-3">
                 <div>
                   <p className="font-semibold text-slate-900">Lovely Professional University, Phagwara, Punjab</p>
-                  <p>B.Tech CSE | CGPA: 7.67 | Aug&apos; 23 - Present</p>
+                  <p>B.Tech Computer Science | CGPA: 7.67 | Aug 2023 – Present</p>
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900">Navyug Convent School, Najafgarh, New Delhi</p>
-                  <p>Higher Secondary | PCM | Percentage: 71% | May&apos; 21 - May&apos; 23</p>
+                  <p>Higher Secondary | PCM | Percentage: 71% | May 2021 – May 2023</p>
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900">Vivekanand Sr. Sec. School, Dharuhera, Haryana</p>
-                  <p>Matriculation | Percentage: 85% | Mar&apos; 20 - May&apos; 21</p>
+                  <p>Matriculation | Percentage: 85% | Mar 2020 – May 2021</p>
                 </div>
               </div>
             </section>
