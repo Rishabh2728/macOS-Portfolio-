@@ -258,6 +258,10 @@ function formatWeatherHour(value) {
   }).format(new Date(value));
 }
 
+function isPrimaryPointerStart(event) {
+  return event.pointerType !== "mouse" || event.button === 0;
+}
+
 const appConfig = {
   calendar: { title: "Calendar", icon: "25", iconTileClassName: "bg-gradient-to-br from-rose-400/90 to-red-500/90 text-white dark:from-rose-300/80 dark:to-red-400/80" },
   clock: { title: "Clock", icon: "◴", iconTileClassName: "bg-gradient-to-br from-slate-500/90 to-slate-700/90 text-white dark:from-slate-400/80 dark:to-slate-600/80" },
@@ -270,6 +274,8 @@ const appConfig = {
   resume: { title: "Resume", icon: "CV", iconTileClassName: "bg-gradient-to-br from-emerald-400/90 to-teal-600/90 text-white dark:from-emerald-300/80 dark:to-teal-500/80" },
   terminal: { title: "Terminal", icon: ">", image: terminalLogo, imageClassName: "scale-[1.1] object-center" },
   contact: { title: "Contact", icon: "✉", image: contactLogo },
+  github: { title: "GitHub", icon: "⌘", image: githubLogo, imageClassName: "scale-[1.32] object-center" },
+  linkedin: { title: "LinkedIn", icon: "in", image: linkedinLogo },
 };
 
 const dockApps = [
@@ -280,7 +286,7 @@ const dockApps = [
   { id: "resume", label: "Resume", icon: "CV" },
   { id: "terminal", label: "Terminal", icon: ">", image: terminalLogo, imageClassName: "scale-[1.1] object-center" },
   { id: "contact", label: "Contact", icon: "✉", image: contactLogo },
-  { id: "github", label: "GitHub", icon: "⌘", image: githubLogo, imageClassName: "scale-[1.22] object-center", external: profile.github },
+  { id: "github", label: "GitHub", icon: "⌘", image: githubLogo, imageClassName: "scale-[1.32] object-center", external: profile.github },
   { id: "linkedin", label: "LinkedIn", icon: "in", image: linkedinLogo, external: profile.linkedin },
 ];
 
@@ -306,6 +312,34 @@ const defaultWidgetPositions = {
 };
 
 const defaultWindows = [];
+
+const mobileApps = [
+  { id: "about", label: "About" },
+  { id: "projects", label: "Projects" },
+  { id: "certificates", label: "Certificates" },
+  { id: "skills", label: "Skills" },
+  { id: "resume", label: "Resume" },
+  { id: "terminal", label: "Terminal" },
+  { id: "contact", label: "Contact" },
+  { id: "calendar", label: "Calendar" },
+  { id: "weather", label: "Weather" },
+  { id: "github", label: "GitHub", external: profile.github },
+  { id: "linkedin", label: "LinkedIn", external: profile.linkedin },
+];
+
+const mobileGridOrder = [
+  "about",
+  "projects",
+  "certificates",
+  "skills",
+  "resume",
+  "terminal",
+  "contact",
+  "calendar",
+  "weather",
+  "github",
+  "linkedin",
+];
 
 function formatClock(date) {
   return new Intl.DateTimeFormat("en-US", {
@@ -1092,7 +1126,7 @@ function AppWindow({
         }`}
         style={{ touchAction: "none" }}
         onPointerDown={(event) => {
-          if (window.innerWidth < 768 || event.button !== 0 || event.target.closest("button")) {
+          if (window.innerWidth < 768 || !isPrimaryPointerStart(event) || event.target.closest("button")) {
             return;
           }
           onFocus(windowItem.id);
@@ -1178,18 +1212,24 @@ function AppWindow({
           <button
             onPointerDown={(event) => event.stopPropagation()}
             onClick={(event) => stopWindowControlEvent(event, () => onClose(windowItem.id))}
-            className="h-3.5 w-3.5 rounded-full bg-[#ff5f57]"
-          />
+            className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#ff5f57] text-[9px] font-black leading-none text-[#4f100c]"
+          >
+            {"\u2716"}
+          </button>
           <button
             onPointerDown={(event) => event.stopPropagation()}
             onClick={(event) => stopWindowControlEvent(event, () => onMinimize(windowItem.id))}
-            className="h-3.5 w-3.5 rounded-full bg-[#febb2e]"
-          />
+            className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#febb2e] text-[9px] font-black leading-none text-[#4e2f00]"
+          >
+            {"\u2501"}
+          </button>
           <button
             onPointerDown={(event) => event.stopPropagation()}
             onClick={(event) => stopWindowControlEvent(event, () => onToggleMaximize(windowItem.id))}
-            className="h-3.5 w-3.5 rounded-full bg-[#28c840]"
-          />
+            className="grid h-3.5 w-3.5 place-items-center rounded-full bg-[#28c840] text-[8px] font-black leading-none text-[#083f14]"
+          >
+            {"\uD83D\uDDD6"}
+          </button>
         </div>
         <div />
         <div />
@@ -1199,8 +1239,36 @@ function AppWindow({
   );
 }
 
+function MobileAppWindow({ windowItem, onClose, children }) {
+  return (
+    <section
+      data-app-window
+      className="absolute inset-0 z-40 flex flex-col overflow-hidden bg-white/82 backdrop-blur-3xl dark:bg-slate-950/82"
+      style={{ zIndex: windowItem.z }}
+    >
+      <div className="flex items-center justify-between border-b border-slate-200/70 px-4 pb-3 pt-12 dark:border-white/10">
+        <div>
+          <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-sky-600 dark:text-sky-300">
+            {appConfig[windowItem.id]?.title || windowItem.id}
+          </p>
+        </div>
+        <button
+          onClick={() => onClose(windowItem.id)}
+          className="rounded-full bg-slate-900 px-3 py-1.5 text-xs font-medium text-white dark:bg-white dark:text-slate-900"
+        >
+          Close
+        </button>
+      </div>
+      <div className="flex-1 overflow-auto px-4 pb-8 pt-4">{children}</div>
+    </section>
+  );
+}
+
 export default function App() {
   const [theme, setTheme] = useState("light");
+  const [viewportWidth, setViewportWidth] = useState(
+    typeof window !== "undefined" ? window.innerWidth : 1024,
+  );
   const [systemTime, setSystemTime] = useState(() => new Date());
   const [calendarMonth, setCalendarMonth] = useState(() => startOfMonth(new Date()));
   const [certificatesLayout, setCertificatesLayout] = useState("grid");
@@ -1270,6 +1338,12 @@ export default function App() {
   }, []);
 
   useEffect(() => {
+    const handleResize = () => setViewportWidth(window.innerWidth);
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  useEffect(() => {
     return () => {
       if (batteryPopupTimeoutRef.current) {
         clearTimeout(batteryPopupTimeoutRef.current);
@@ -1284,25 +1358,39 @@ export default function App() {
     window.addEventListener("online", handleOnline);
     window.addEventListener("offline", handleOffline);
 
-    let cleanupBattery = null;
-
-    if (navigator.getBattery) {
-      navigator.getBattery().then((battery) => {
-        const updateBattery = () => setBatteryLevel(Math.round(battery.level * 100));
-        updateBattery();
-        battery.addEventListener("levelchange", updateBattery);
-        battery.addEventListener("chargingchange", updateBattery);
-        cleanupBattery = () => {
-          battery.removeEventListener("levelchange", updateBattery);
-          battery.removeEventListener("chargingchange", updateBattery);
-        };
-      });
-    }
-
     return () => {
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
-      if (cleanupBattery) cleanupBattery();
+    };
+  }, []);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadBatteryLevel = async () => {
+      try {
+        const response = await fetch("/api/system/battery", { cache: "no-store" });
+        if (!response.ok) {
+          throw new Error("Battery request failed");
+        }
+
+        const data = await response.json();
+        if (!cancelled) {
+          setBatteryLevel(typeof data.level === "number" ? data.level : null);
+        }
+      } catch {
+        if (!cancelled) {
+          setBatteryLevel(null);
+        }
+      }
+    };
+
+    loadBatteryLevel();
+    const intervalId = setInterval(loadBatteryLevel, 30000);
+
+    return () => {
+      cancelled = true;
+      clearInterval(intervalId);
     };
   }, []);
 
@@ -1570,6 +1658,8 @@ export default function App() {
     minute: "2-digit",
   }).format(systemTime);
 
+  const isMobile = viewportWidth < 1024;
+
   const showBatteryStatusPopup = () => {
     setShowBatteryPopup(true);
     if (batteryPopupTimeoutRef.current) {
@@ -1580,6 +1670,223 @@ export default function App() {
       batteryPopupTimeoutRef.current = null;
     }, 3200);
   };
+
+  if (isMobile) {
+    const activeMobileWindows = [...windows].sort((a, b) => a.z - b.z);
+    const mobileDockApps = mobileApps.filter((app) => ["about", "projects", "terminal", "contact"].includes(app.id));
+    const mobileGridGap = 12;
+    const mobileGridSidePadding = 16;
+    const mobileGridSlotWidth = Math.max(68, (viewportWidth - mobileGridSidePadding * 2 - mobileGridGap * 3) / 4);
+    const mobileGridApps = mobileGridOrder
+      .map((id) => mobileApps.find((app) => app.id === id))
+      .filter(Boolean);
+    return (
+      <div className={theme === "dark" ? "dark" : ""}>
+        <div className="relative h-screen overflow-hidden bg-slate-100 text-ink transition-colors duration-500 dark:bg-slate-950 dark:text-slate-100">
+          <div
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${theme === "light" ? "opacity-100" : "opacity-0"}`}
+            style={{ backgroundImage: `url(${macosBg})` }}
+          />
+          <div
+            className={`absolute inset-0 bg-cover bg-center bg-no-repeat transition-opacity duration-700 ${theme === "dark" ? "opacity-100" : "opacity-0"}`}
+            style={{ backgroundImage: `url(${macosDarkBg})` }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/20 dark:from-black/20 dark:to-black/35" />
+
+          <div className="absolute inset-x-0 top-0 z-50 px-4 pt-4">
+            <div className="flex items-center justify-between px-1 text-sm font-semibold text-white">
+              <span>{new Intl.DateTimeFormat("en-US", { hour: "2-digit", minute: "2-digit" }).format(systemTime)}</span>
+              <div className="flex items-center gap-2 text-xs">
+                <span>{isOnline ? "ᯤ" : "Offline"}</span>
+                <span>{batteryLevel !== null ? `\u26A1 ${batteryLevel}%` : "\u26A1"}</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="relative z-10 flex h-full flex-col px-4 pb-5 pt-14">
+            <div className="mt-5 px-2 text-center text-white">
+              <p className="min-h-[3.4em] max-w-full text-lg font-semibold leading-snug text-white/95">
+                <span className="typing-inline-caret break-words">{typing.trimEnd()}</span>
+              </p>
+            </div>
+
+            <div className="mt-7 grid auto-rows-[6.2rem] grid-cols-4 gap-x-3 gap-y-4">
+              {mobileGridApps.slice(0, 6).map((app) => (
+                <button
+                  key={app.id}
+                  onClick={() => {
+                    if (app.external) {
+                      window.open(app.external, "_blank", "noreferrer");
+                      return;
+                    }
+                    if (app.id === "calendar") {
+                      setCalendarMonth(startOfMonth(systemTime));
+                    }
+                    openWindow(app.id);
+                  }}
+                  className="flex flex-col items-center gap-2 text-center"
+                >
+                  <div className="grid h-16 w-16 place-items-center overflow-hidden rounded-[20px] text-xl text-white">
+                    {appConfig[app.id]?.image ? (
+                      <IconContent
+                        label={app.label}
+                        icon={appConfig[app.id]?.icon}
+                        image={appConfig[app.id]?.image}
+                        imageClassName={appConfig[app.id]?.imageClassName}
+                        className="grid h-full w-full place-items-center"
+                      />
+                    ) : (
+                      <div
+                        className={`grid h-full w-full place-items-center rounded-[inherit] font-semibold ${
+                          appConfig[app.id]?.iconTileClassName || ""
+                        }`}
+                      >
+                        {appConfig[app.id]?.icon}
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-[11px] font-medium leading-4 text-white drop-shadow-sm">{app.label}</span>
+                </button>
+              ))}
+
+              <div className="col-span-2 col-start-3 row-span-2 row-start-2">
+                <div className="flex h-[11.9rem] flex-col rounded-[28px] border border-white/10 bg-black/70 px-4 py-4 shadow-glass backdrop-blur-xl">
+                  <div className="mt-3 flex items-start justify-center gap-2 leading-none">
+                    <span className="text-xs font-semibold uppercase tracking-[0.18em] text-red-400">
+                      {new Intl.DateTimeFormat("en-US", { weekday: "short" }).format(systemTime)}
+                    </span>
+                    <span className="text-xs font-medium uppercase tracking-[0.16em] text-white/55">
+                      {new Intl.DateTimeFormat("en-US", { month: "short" }).format(systemTime)}
+                    </span>
+                  </div>
+                  <div className="grid flex-1 place-items-center overflow-hidden -mt-1">
+                    <span className="scale-y-[1.18] text-[5.95rem] font-semibold leading-none text-white">
+                      {new Intl.DateTimeFormat("en-US", { day: "numeric" }).format(systemTime)}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {mobileGridApps.slice(6).map((app) => (
+                <button
+                  key={app.id}
+                  onClick={() => {
+                    if (app.external) {
+                      window.open(app.external, "_blank", "noreferrer");
+                      return;
+                    }
+                    if (app.id === "calendar") {
+                      setCalendarMonth(startOfMonth(systemTime));
+                    }
+                    openWindow(app.id);
+                  }}
+                  className="flex flex-col items-center gap-2 text-center"
+                >
+                  <div className="grid h-16 w-16 place-items-center overflow-hidden rounded-[20px] text-xl text-white">
+                    {appConfig[app.id]?.image ? (
+                      <IconContent
+                        label={app.label}
+                        icon={appConfig[app.id]?.icon}
+                        image={appConfig[app.id]?.image}
+                        imageClassName={appConfig[app.id]?.imageClassName}
+                        className="grid h-full w-full place-items-center"
+                      />
+                    ) : (
+                      <div
+                        className={`grid h-full w-full place-items-center rounded-[inherit] font-semibold ${
+                          appConfig[app.id]?.iconTileClassName || ""
+                        }`}
+                      >
+                        {appConfig[app.id]?.icon}
+                      </div>
+                    )}
+                  </div>
+                  <span className="text-[11px] font-medium leading-4 text-white drop-shadow-sm">{app.label}</span>
+                </button>
+              ))}
+            </div>
+
+            <div className="mt-auto flex justify-center pb-1">
+              <div
+                className="flex w-full items-end justify-between rounded-[28px] border border-white/25 bg-white/20 px-4 py-3 shadow-dock backdrop-blur-2xl dark:border-white/10 dark:bg-slate-900/25"
+              >
+                {mobileDockApps.map((app) => (
+                  <button
+                    key={app.id}
+                    onClick={() => openWindow(app.id)}
+                    className="grid place-items-center text-white"
+                    style={{ width: mobileGridSlotWidth }}
+                  >
+                    <div
+                      className={`grid h-16 w-16 place-items-center overflow-hidden rounded-[20px] text-white ${
+                        appConfig[app.id]?.transparentTile ? "bg-transparent shadow-none" : "bg-transparent shadow-none ring-0 backdrop-blur-none"
+                      }`}
+                    >
+                      {appConfig[app.id]?.image ? (
+                        <IconContent
+                          label={app.label}
+                          icon={appConfig[app.id]?.icon}
+                          image={appConfig[app.id]?.image}
+                          imageClassName={appConfig[app.id]?.imageClassName}
+                          className="grid h-full w-full place-items-center"
+                        />
+                      ) : (
+                        <div
+                          className={`grid h-full w-full place-items-center rounded-[inherit] font-semibold ${
+                            appConfig[app.id]?.iconTileClassName || ""
+                          }`}
+                        >
+                          {appConfig[app.id]?.icon}
+                        </div>
+                      )}
+                    </div>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {activeMobileWindows.map((windowItem) => (
+            <MobileAppWindow key={windowItem.id} windowItem={windowItem} onClose={closeWindow}>
+              {getWindowBody(windowItem.id, {
+                openWindow,
+                calendarMonth,
+                setCalendarMonth,
+                systemTime,
+                weatherData,
+                batteryLevel,
+                certificatesLayout,
+                setCertificatesLayout,
+                certificatesIndex,
+                setCertificatesIndex,
+              })}
+            </MobileAppWindow>
+          ))}
+
+          <div
+            className={`pointer-events-none absolute inset-0 z-[44] grid place-items-center transition-opacity duration-700 ${
+              showBatteryPopup ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <div className="rounded-[30px] bg-white/35 px-8 py-7 shadow-glass ring-1 ring-white/40 backdrop-blur-2xl dark:bg-slate-950/35 dark:ring-white/10">
+              <div className="relative h-24 w-48 rounded-[24px] border-[6px] border-slate-700/80 p-2 dark:border-slate-100/80">
+                <div className="h-full rounded-[14px] bg-slate-200/80 dark:bg-slate-800/70">
+                  <div
+                    className="h-full rounded-[14px] bg-gradient-to-r from-emerald-400 to-lime-400 transition-[width] duration-500"
+                    style={{ width: `${Math.max(0, Math.min(100, batteryLevel ?? 0))}%` }}
+                  />
+                </div>
+                <div className="absolute right-[-14px] top-1/2 h-9 w-3 -translate-y-1/2 rounded-r-md bg-slate-700/80 dark:bg-slate-100/80" />
+                <div className="absolute inset-0 grid place-items-center text-3xl font-semibold text-slate-900 dark:text-slate-100">
+                  {batteryLevel !== null ? `${batteryLevel}%` : "\u26A1"}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={theme === "dark" ? "dark" : ""}>
@@ -1687,7 +1994,7 @@ export default function App() {
                 onClick={showBatteryStatusPopup}
                 className="rounded-full bg-white/20 px-2 py-1 transition-colors duration-500 hover:bg-white/30 dark:bg-white/10 dark:hover:bg-white/15"
               >
-                {`⚡︎ ${batteryLevel !== null ? `${batteryLevel}%` : "--"}`}
+                {batteryLevel !== null ? `\u26A1\uFE0E ${batteryLevel}%` : "\u26A1\uFE0E"}
               </button>
                 <div className="pointer-events-none absolute top-full left-1/2 z-10 flex -translate-x-1/2 pt-1 opacity-0 transition duration-150 group-hover:translate-y-0.5 group-hover:opacity-100">
                   <div className="flex flex-col items-center">
@@ -1730,7 +2037,7 @@ export default function App() {
                 top: desktopPositions[shortcut.id]?.y ?? 64,
               }}
               onPointerDown={(event) => {
-                if (window.innerWidth < 768 || event.button !== 0) return;
+                if (window.innerWidth < 768 || !isPrimaryPointerStart(event)) return;
                 const target = event.currentTarget;
                 desktopDragRef.current = {
                   id: shortcut.id,
@@ -1825,7 +2132,7 @@ export default function App() {
             className={`pointer-events-auto absolute w-[7.4rem] ${draggingWidgetId === "calendar" ? "cursor-grabbing" : "cursor-grab"}`}
             style={{ left: widgetPositions.calendar.x, top: widgetPositions.calendar.y }}
             onPointerDown={(event) => {
-              if (window.innerWidth < 768 || event.button !== 0) return;
+              if (window.innerWidth < 768 || !isPrimaryPointerStart(event)) return;
               const target = event.currentTarget;
               widgetDragRef.current = {
                 id: "calendar",
@@ -1872,7 +2179,7 @@ export default function App() {
             className={`pointer-events-auto absolute w-[7.4rem] ${draggingWidgetId === "weather" ? "cursor-grabbing" : "cursor-grab"}`}
             style={{ left: widgetPositions.weather.x, top: widgetPositions.weather.y }}
             onPointerDown={(event) => {
-              if (window.innerWidth < 768 || event.button !== 0) return;
+              if (window.innerWidth < 768 || !isPrimaryPointerStart(event)) return;
               const target = event.currentTarget;
               widgetDragRef.current = {
                 id: "weather",
@@ -1979,7 +2286,7 @@ export default function App() {
               </div>
               <div className="absolute right-[-14px] top-1/2 h-9 w-3 -translate-y-1/2 rounded-r-md bg-slate-700/80 dark:bg-slate-100/80" />
               <div className="absolute inset-0 grid place-items-center text-3xl font-semibold text-slate-900 dark:text-slate-100">
-                {batteryLevel !== null ? `${batteryLevel}%` : "--"}
+                {batteryLevel !== null ? `${batteryLevel}%` : "\u26A1"}
               </div>
             </div>
           </div>
