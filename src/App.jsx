@@ -39,22 +39,124 @@ const profile = {
 
 const projects = [
   {
-    id: "aurora",
-    title: "Aurora Commerce",
-    description: "A premium full stack commerce platform with analytics, checkout flows, and admin tooling.",
-    stack: ["React", "Node.js", "PostgreSQL", "Stripe"],
+    id: "macos-portfolio",
+    title: "macOS-Portfolio",
+    tagline: "A desktop-style portfolio experience inspired by macOS.",
+    description:
+      "An interactive portfolio website built to recreate the macOS desktop experience in the browser. It features app-like navigation, window management, dock interactions, and a working terminal-inspired interface. The project highlights strong frontend engineering, immersive UI design, and polished user experience execution.",
+    tech: ["React", "Tailwind CSS", "JavaScript"],
+    stack: ["React", "Tailwind CSS", "JavaScript"],
+    github: "https://github.com/Rishabh2728/macOS-Portfolio",
+    category: "Frontend",
+    icon: "🖥️",
   },
   {
-    id: "atlas",
-    title: "Atlas Analytics",
-    description: "A data workspace for dashboarding, reporting, and anomaly detection.",
-    stack: ["React", "Python", "FastAPI", "Plotly"],
+    id: "datagen-cli",
+    title: "datagen-cli",
+    tagline: "A Python CLI for realistic synthetic dataset generation.",
+    description:
+      "A schema-driven command-line tool that generates realistic synthetic datasets for testing and development workflows. It is designed to support machine learning experiments, rapid prototyping, and structured data generation at scale. The project demonstrates practical Python tooling, automation, and developer-focused product design.",
+    tech: ["Python", "CLI", "Data Generation"],
+    stack: ["Python", "CLI", "Data Generation"],
+    github: "https://github.com/Rishabh2728/datagen-cli",
+    category: "Python Tool",
+    icon: "⚙️",
   },
   {
-    id: "nova",
-    title: "Nova ML Studio",
-    description: "A machine learning experimentation tool for comparing runs, datasets, and metrics.",
-    stack: ["Python", "PyTorch", "Streamlit"],
+    id: "creator-connect-frontend",
+    title: "Creator-Connect-Frontend",
+    tagline: "A modern frontend for creator discovery and engagement.",
+    description:
+      "A frontend application built for a creator-focused platform with profile-driven experiences and content discovery flows. It emphasizes responsive layouts, modern UI interactions, and clean integration with backend APIs. The project showcases scalable component design and polished frontend implementation for real-world platforms.",
+    tech: ["JavaScript", "React", "REST APIs"],
+    stack: ["JavaScript", "React", "REST APIs"],
+    github: "https://github.com/Rishabh2728/Creator-Connect-Frontend",
+    category: "Frontend",
+    icon: "🌐",
+  },
+  {
+    id: "creator-content-backend",
+    title: "Creator-Content-Backend",
+    tagline: "A scalable backend for creator content operations.",
+    description:
+      "A backend service responsible for managing content workflows, storage logic, and creator interactions through structured APIs. It is designed to support maintainable server-side architecture and efficient request handling. The project reflects strong backend fundamentals in API design, modularity, and service reliability.",
+    tech: ["Node.js", "Express", "MongoDB", "REST API"],
+    stack: ["Node.js", "Express", "MongoDB", "REST API"],
+    github: "https://github.com/Rishabh2728/Creator-Content-Backend",
+    category: "Backend",
+    icon: "🔧",
+  },
+  {
+    id: "user-management-api",
+    title: "User-Management-API",
+    tagline: "A secure API for authentication and user lifecycle management.",
+    description:
+      "A production-style backend system focused on authentication, authorization, and complete user account management. It handles secure access flows, protected routes, and structured user operations for modern applications. The project demonstrates practical security-oriented backend development and robust API architecture.",
+    tech: ["Node.js", "Express", "MongoDB", "Authentication"],
+    stack: ["Node.js", "Express", "MongoDB", "Authentication"],
+    github: "https://github.com/Rishabh2728/User-Management-API",
+    category: "Backend",
+    icon: "🔐",
+  },
+  {
+    id: "fake-twitter-account-detector",
+    title: "Fake-Twitter-Account-Detector",
+    tagline: "A machine learning project for fake account detection.",
+    description:
+      "A machine learning system built to identify fake Twitter accounts using engineered behavioral and profile-based features. It applies classification techniques to distinguish suspicious patterns from legitimate user activity. The project highlights applied ML workflow, feature engineering, and model evaluation for real-world detection problems.",
+    tech: ["Python", "Machine Learning", "Data Analysis"],
+    stack: ["Python", "Machine Learning", "Data Analysis"],
+    github: "https://github.com/Rishabh2728/Fake-Twitter-Account-Detector",
+    category: "Machine Learning",
+    icon: "🤖",
+  },
+  {
+    id: "academic-burnout-prediction-model",
+    title: "Academic-burnout-prediction-model",
+    tagline: "A predictive model for analyzing student burnout patterns.",
+    description:
+      "A predictive analytics project focused on understanding academic burnout through statistical analysis and machine learning techniques. It examines student-related indicators to uncover meaningful burnout trends and risk factors. The project demonstrates data analysis, model building, and practical application of ML in education-focused problem solving.",
+    tech: ["Python", "Pandas", "ML"],
+    stack: ["Python", "Pandas", "ML"],
+    github: "https://github.com/Rishabh2728/Academic-burnout-prediction-model",
+    category: "Machine Learning",
+    icon: "📊",
+  },
+  {
+    id: "virtual-event-manager",
+    title: "Virtual-event-manager",
+    tagline: "A full-stack platform for virtual event coordination.",
+    description:
+      "A web platform developed to manage virtual events with scheduling, participant interaction, and event organization workflows. It combines user-facing functionality with backend-driven logic to deliver an end-to-end event management experience. The project demonstrates full-stack problem solving and practical feature integration for digital events.",
+    tech: ["JavaScript", "Node.js"],
+    stack: ["JavaScript", "Node.js"],
+    github: "https://github.com/Rishabh2728/Virtual-event-manager",
+    category: "Full Stack",
+    icon: "🎤",
+  },
+  {
+    id: "youtube-clone",
+    title: "YouTube-Clone",
+    tagline: "A responsive video platform interface inspired by YouTube.",
+    description:
+      "A frontend project that recreates the visual structure and interaction patterns of a modern video streaming platform. It focuses on responsive layouts, content presentation, and intuitive navigation design. The project showcases strong UI implementation skills and attention to frontend detail in component-based layouts.",
+    tech: ["JavaScript", "HTML", "CSS"],
+    stack: ["JavaScript", "HTML", "CSS"],
+    github: "https://github.com/Rishabh2728/YouTube-Clone",
+    category: "Frontend",
+    icon: "🎬",
+  },
+  {
+    id: "cms-backend",
+    title: "CMS-BACKEND",
+    tagline: "A backend CMS designed for scalable content operations.",
+    description:
+      "A backend content management system built to support structured content workflows and API-driven integrations. It is designed with scalability and maintainability in mind for handling modern content operations. The project demonstrates backend architecture, clean REST design, and practical service development for content-heavy applications.",
+    tech: ["Node.js", "Express", "MongoDB", "REST API"],
+    stack: ["Node.js", "Express", "MongoDB", "REST API"],
+    github: "https://github.com/Rishabh2728/CMS-BACKEND",
+    category: "Backend",
+    icon: "🗄️",
   },
 ];
 
@@ -578,13 +680,32 @@ function getWindowBody(id, controls) {
         <div className="grid gap-4 lg:grid-cols-2">
           {projects.map((project) => (
             <GlassCard key={project.id} title={project.title}>
-              <p>{project.description}</p>
-              <div className="mt-4 flex flex-wrap gap-2">
-                {project.stack.map((item) => (
-                  <span key={item} className="rounded-full bg-white/65 px-3 py-1 text-xs text-slate-700">
-                    {item}
-                  </span>
-                ))}
+              <div className="rounded-[20px] bg-white/82 px-4 py-4 ring-1 ring-slate-200/70 shadow-sm dark:bg-slate-950/55 dark:ring-white/10">
+              <ul className="list-disc space-y-2 pl-5 text-sm text-slate-900 marker:text-slate-600 dark:text-slate-100 dark:marker:text-slate-300">
+                <li>{project.tagline}</li>
+                <li className="leading-6 text-slate-900 dark:text-slate-100">{project.description}</li>
+                <li className="font-medium text-slate-900 dark:text-slate-100">{project.category}</li>
+                <li className="pt-1">
+                  <div className="flex flex-wrap gap-2">
+                  {project.stack.map((item) => (
+                    <span key={item} className="rounded-full bg-slate-100 px-3 py-1 text-xs text-slate-800 ring-1 ring-slate-200 dark:bg-white/10 dark:text-slate-100 dark:ring-white/10">
+                      {item}
+                    </span>
+                  ))}
+                  </div>
+                </li>
+              </ul>
+              <div className="mt-4 flex items-center justify-between gap-3">
+                <span className="truncate text-sm font-medium text-slate-800 dark:text-slate-200">GitHub</span>
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex shrink-0 items-center gap-2 rounded-2xl bg-slate-900 px-3 py-2 text-sm font-medium text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
+                >
+                  GitHub →
+                </a>
+              </div>
               </div>
             </GlassCard>
           ))}
